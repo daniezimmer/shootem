@@ -1,6 +1,8 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System;
+using System.Collections.Generic;
 
 namespace shootem
 {
@@ -11,7 +13,12 @@ namespace shootem
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+
         
+
+        GameLogic gameLogic;
+        Dictionary<string, Texture2D> textureDictionary;
+
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -27,7 +34,8 @@ namespace shootem
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-
+            gameLogic = new GameLogic();
+            textureDictionary = new Dictionary<string, Texture2D>();
             base.Initialize();
         }
 
@@ -41,6 +49,7 @@ namespace shootem
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // TODO: use this.Content to load your game content here
+            textureDictionary.Add("ball", Content.Load<Texture2D>("ball"));
         }
 
         /// <summary>
@@ -63,7 +72,7 @@ namespace shootem
                 Exit();
 
             // TODO: Add your update logic here
-
+            gameLogic.Update();
             base.Update(gameTime);
         }
 
@@ -75,7 +84,11 @@ namespace shootem
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            // TODO: Add your drawing code here
+            spriteBatch.Begin();
+            //draw logic here.
+
+
+            spriteBatch.End();
 
             base.Draw(gameTime);
         }
