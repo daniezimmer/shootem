@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace shootem
 {
-    class Projectile
+    class Projectile : Entity
     {
     }
 }

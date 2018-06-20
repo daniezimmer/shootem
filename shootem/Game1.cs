@@ -17,7 +17,7 @@ namespace shootem
         
 
         GameLogic gameLogic;
-        Dictionary<string, Texture2D> textureDictionary;
+        Dictionary<int, Texture2D> textureDictionary;
 
         public Game1()
         {
@@ -35,7 +35,7 @@ namespace shootem
         {
             // TODO: Add your initialization logic here
             gameLogic = new GameLogic();
-            textureDictionary = new Dictionary<string, Texture2D>();
+            textureDictionary = new Dictionary<int, Texture2D>();
             base.Initialize();
         }
 
@@ -49,7 +49,7 @@ namespace shootem
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // TODO: use this.Content to load your game content here
-            textureDictionary.Add("ball", Content.Load<Texture2D>("ball"));
+            textureDictionary.Add(0, Content.Load<Texture2D>("ball"));
         }
 
         /// <summary>
@@ -85,8 +85,34 @@ namespace shootem
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             spriteBatch.Begin();
-            //draw logic here.
 
+            //draw logic here.
+            foreach (Enemy e in gameLogic.enemyList)
+            {
+                spriteBatch.Draw(
+                    textureDictionary[e.textureId],
+                    e.position,
+                    null,
+                    Color.White,
+                    0f,
+                    new Vector2(0,0),
+                    new Vector2(1,1),
+                    SpriteEffects.None,
+                    0f
+                    );
+            }
+
+            spriteBatch.Draw(
+                ballTexture,
+                ballPosition,
+                null,
+                Color.White,
+                0f,
+                new Vector2(ballTexture.Width / 2, ballTexture.Height / 2),
+                Vector2.One,
+                SpriteEffects.None,
+                0f
+                );
 
             spriteBatch.End();
 

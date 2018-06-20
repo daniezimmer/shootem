@@ -9,11 +9,19 @@ namespace shootem
 {
     class Enemy : Entity
     {
-        public Enemy(int id, Vector2 position = new Vector2(), int tid = 0) : base(id, position, tid)
+        public Enemy() : base()
         {
-            Console.Out.Write("id:{id}, pos:{position}, tid:{tid}");
 
         }
+
+        public Enemy(Vector2 initialPosition, int textureId) : base(initialPosition, textureId)
+        {
+
+        }
+        
+        //TODO: Insert movement pattern
+        //TODO: Insert attack pattern
+        //TODO: Collision?
 
 
         public void Update()
@@ -24,18 +32,29 @@ namespace shootem
 
     class EnemyFactory
     {
+        EntityFactory entityFactory;
+        List<Enemy> enemyList;
         Dictionary<int, Enemy> enemyTypes;
 
-        public EnemyFactory()
+        public EnemyFactory(EntityFactory entityFactory,List<Enemy> enemyList)
         {
+            this.entityFactory = entityFactory;
+            this.enemyList = enemyList;
             enemyTypes = new Dictionary<int, Enemy>();
 
         }
 
         public void DefineEnemyType()
         {
-            Enemy Temp = new Enemy(0);
+            enemyTypes.Add(0, new Enemy(new Vector2(40, 40), 0));
+            enemyTypes.Add(1, new Enemy(new Vector2(100, 100), 0));
+            enemyTypes.Add(2, new Enemy(new Vector2(100, 200), 0));
+            enemyTypes.Add(3, new Enemy(new Vector2(200, 150), 0));
+        }
 
+        public void SpawnType(int i)
+        {
+            enemyList.Add(enemyTypes[i]);
         }
     }
 }

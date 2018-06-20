@@ -7,29 +7,28 @@ using System.Threading.Tasks;
 
 namespace shootem
 {
-    class Entity
+    abstract class Entity
     {
-        int entityId;
-        Vector2 position;
-        int textureId;    
+        public Vector2 position;
+        public int textureId;    
 
-        public Entity(int id, Vector2 position, int tid)
+
+        public Entity(Vector2 position, int tid)
         {
-            this.entityId = id;
             this.position = position;
             this.textureId = tid;
+        }
+        
+        public Entity()
+        {
+            this.position = Vector2.Zero;
+            this.textureId = 0;
         }
 
     }
 
     class EntityFactory
     {
-        public EntityFactory()
-        {
-
-
-        }
-
 
 
     }
